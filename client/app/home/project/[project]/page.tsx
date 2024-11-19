@@ -78,7 +78,6 @@ const ProjectDetails = () => {
 
   const onAddTodo = () => {
     setShowAddTodo(false);
-    findProject(params?.project);
   };
 
   if (isPending) {
@@ -101,6 +100,7 @@ const ProjectDetails = () => {
         open={showAddTodo}
         onCancel={toggleAddTodo}
         footer={null}
+        destroyOnClose
       >
         <AddTodo projectId={project?.id} onSuccess={onAddTodo} />
       </Modal>

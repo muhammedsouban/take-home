@@ -85,6 +85,7 @@ export default function Home() {
         onCancel={toggleProjectForm}
         footer={null}
         title="Create Project"
+        destroyOnClose
       >
         <ProjectForm toggleProjectForm={toggleProjectForm} />
       </Modal>
