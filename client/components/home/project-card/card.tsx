@@ -50,8 +50,7 @@ export default function ProjectCard({ project, onCardClick, onSuccess }: any) {
     setShowAddTodo((prevShowAddTodo) => !prevShowAddTodo);
   };
 
-  const onAddTodo = (formData: any) => {
-    todoMutation.mutate(formData);
+  const onAddTodo = () => {
     setShowAddTodo(false);
   };
 
@@ -136,6 +135,7 @@ export default function ProjectCard({ project, onCardClick, onSuccess }: any) {
         open={showAddTodo}
         onCancel={toggleAddTodo}
         footer={null}
+        destroyOnClose
       >
         <AddTodo projectId={project?.id} onSuccess={onAddTodo} />
       </Modal>

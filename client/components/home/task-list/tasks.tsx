@@ -135,6 +135,7 @@ const Tasks = ({ todo, index }: { todo: any; index: number }) => {
         open={showAddTodo}
         onCancel={toggleAddTodo}
         footer={null}
+        destroyOnClose
       >
         <AddTodo
           task={todo}
