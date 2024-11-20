@@ -23,7 +23,7 @@ export default function ProjectList({
             project={item}
             key={item.id}
             onCardClick={onCardClick}
-            onSuccess={refreshList}
+            onDeleteSuccess={refreshList}
           />
         </div>
       ))}

@@ -41,7 +41,7 @@ export default function Home() {
     }
   };
 
-  const { isPending, isError, data, error } = useQuery({
+  const { isPending, isError, data, error, refetch } = useQuery({
     queryKey: ["projects"],
     queryFn: getProjects,
     enabled: !isEmpty(user),
@@ -74,7 +74,7 @@ export default function Home() {
               {!list?.length ? (
                 <Empty title="No Projects Found" />
               ) : (
-                <ProjectList list={list} refreshList={getProjects} />
+                <ProjectList list={list} refreshList={refetch} />
               )}
             </div>
           </Card>

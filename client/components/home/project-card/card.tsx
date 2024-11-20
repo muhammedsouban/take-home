@@ -4,29 +4,13 @@ import { Plus, Trash2 } from "react-feather";
 import AddTodo from "../add-task-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
-  handleAddTodo,
   handleDeleteProject,
 } from "@/apiHelperFunction/project";
-import { toast } from "react-toastify";
 
-export default function ProjectCard({ project, onCardClick, onSuccess }: any) {
+export default function ProjectCard({ project, onCardClick, onDeleteSuccess }: any) {
   const queryClient = useQueryClient();
 
   const [showAddTodo, setShowAddTodo] = useState<boolean>(false);
-
-  const todoMutation = useMutation({
-    mutationFn: (formData) => handleAddTodo(formData, project?.id),
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ["project"] });
-      if (data) {
-        message.success("Task Created successfully");
-      }
-    },
-    onError: (error: any) => {
-      message.error(error.error);
-      console.log(error.error);
-    },
-  });
 
   const deleteProjectMutation = useMutation({
     mutationFn: () => handleDeleteProject(project.id),
@@ -34,11 +18,14 @@ export default function ProjectCard({ project, onCardClick, onSuccess }: any) {
       queryClient.invalidateQueries({ queryKey: ["projects"] });
       if (data) {
         message.success("Project deleted Successfully ");
-        onSuccess?.();
+        onDeleteSuccess?.();
       }
     },
     onError: (error: any) => {
-      message.error(error.error);
+      message.error(error);
+      console.log(error);
+
+
     },
   });
 
@@ -52,6 +39,7 @@ export default function ProjectCard({ project, onCardClick, onSuccess }: any) {
 
   const onAddTodo = () => {
     setShowAddTodo(false);
+    onDeleteSuccess?.()
   };
 
   const onDeleteProject = () => {
